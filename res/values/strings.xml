@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">GPM_DEMO</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
+    
+    <string name="location_banner">banner</string>
+    
+    <string name="location_all">全屏</string>
+    
+    <string name="location_insert">插屏</string>
+    
+    <string name="location_open">开屏</string>
+
+</resources>
