@@ -5,27 +5,96 @@
 	android:orientation="vertical"
     tools:context="com.gpm.demo.MainActivity" >
 
+<LinearLayout
+    	android:id="@+id/btn_view"
+        android:layout_width="match_parent"
+    android:layout_height="match_parent"
+	android:orientation="vertical">
 
-    
+
     
     <Button
         android:id="@+id/bannerBtn"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:text="@string/location_top"/>
+        android:text="@string/location_banner"/>
     
     
     <Button 
-        android:id="@+id/midBtn"
+        android:id="@+id/allBtn"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:text="@string/location_middle"/>
+        android:text="@string/location_all"/>
         
     <Button
-        android:id="@+id/bottomBtn" 
+        android:id="@+id/insertBtn" 
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:text="@string/location_bottom"/>
+        android:text="@string/location_insert"/>
+    
+        <Button
+        android:id="@+id/openBtn" 
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/location_open"/>
+        
+        
+        <RelativeLayout 
+            android:id="@+id/banner_layout"
+            android:visibility="gone"
+             android:layout_width="match_parent"  
+    		android:layout_height="wrap_content">
+            
+          	<ImageButton 
+		        android:id="@+id/banner_close_btn"
+		        android:layout_width="wrap_content"  
+		        android:layout_height="wrap_content"  
+		        android:layout_alignParentRight="true"  
+		        android:background="@drawable/close_btn" /> 
+          
+          <ImageView
+              android:src="@drawable/ic_launcher"
+              android:layout_below ="@id/banner_close_btn"
+        	android:contentDescription="@string/location_all"
+            android:id="@+id/banner_img"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+            
+        </RelativeLayout>
+        
+
+
+        
+        
+        
+ </LinearLayout>
+ 
+
+<RelativeLayout
+    android:visibility="gone"
+    	android:id="@+id/all_view"
+        android:layout_width="match_parent"
+    android:layout_height="match_parent"
+	android:orientation="vertical">
+        
+          	<ImageButton 
+		        android:id="@+id/all_close_btn"
+		        android:layout_width="wrap_content"  
+		        android:layout_height="wrap_content"  
+		        android:layout_alignParentRight="true"  
+		        android:background="@drawable/close_btn" /> 
+    
+            <ImageView
+                android:src="@drawable/ic_launcher"
+                android:layout_below ="@id/all_close_btn"
+        	android:contentDescription="@string/location_all"
+            android:id="@+id/all_img"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+        
+
+</RelativeLayout>
+
     
     
 

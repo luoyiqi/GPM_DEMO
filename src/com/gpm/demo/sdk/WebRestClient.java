@@ -8,6 +8,7 @@ import android.content.Context;
 
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.AsyncHttpResponseHandler;
+import com.loopj.android.http.FileAsyncHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
 
 /**
@@ -22,7 +23,7 @@ public class WebRestClient {
 
     static {
         // 设置默认的超时时间
-        client.setTimeout(3000);
+        client.setTimeout(6000);
     }
 
     /**
