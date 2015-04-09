@@ -9,6 +9,7 @@ import android.content.Context;
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.AsyncHttpResponseHandler;
 import com.loopj.android.http.FileAsyncHttpResponseHandler;
+import com.loopj.android.http.JsonHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
 
 /**
@@ -48,6 +49,26 @@ public class WebRestClient {
         client.get(url, null, responseHandler);
     }
 
+    /**
+     * get请求，json回调
+     * @param url
+     * @param responseHandler
+     */
+    public static void get(String url, JsonHttpResponseHandler responseHandler) {
+        client.get(url, null, responseHandler);
+    }
+    
+    
+    /**
+     * post请求，json回调
+     * 
+     * @param url
+     * @param responseHandler
+     */
+    public static void post(String url, JsonHttpResponseHandler responseHandler) {
+        client.post(url, null, responseHandler);
+    }
+    
     /**
      * post请求
      * 

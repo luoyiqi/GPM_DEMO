@@ -27,6 +27,7 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
 
+import com.gpm.demo.sdk.AdManager;
 import com.gpm.demo.sdk.AdverDialog;
 import com.gpm.demo.sdk.JsonObject;
 import com.gpm.demo.sdk.JsonTools;
@@ -84,6 +85,9 @@ public class MainActivity extends ActionBarActivity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState); 
 		setContentView(R.layout.activity_main);
+		
+		//提前加载数据
+		AdManager.getInstance(myContext).loadAds();
 		initView();
 //		setActionBarContentView(R.layout.web_view);
 	}
@@ -179,6 +183,15 @@ public class MainActivity extends ActionBarActivity {
 			btnCode = clickId;
 			
 			switch (clickId) {
+			
+			
+			case R.id.insertBtn:
+				
+				AdManager.getInstance(myContext).showAdverDialog();
+				
+				break;
+				
+			
 			case R.id.banner_close_btn:
 				
 				bannerLayout.setVisibility(View.GONE);
@@ -221,12 +234,7 @@ public class MainActivity extends ActionBarActivity {
 		
 		@Override
 		public void onClick(View v) {
-			
-//			// 实例化 Bundle，设置需要传递的参数 
-//	        Bundle bundle = new Bundle(); 
-//	        bundle.putString("redirectUrl", redirectUrl);
 	        
-	        // 在某个按钮响应事件里 
 	        Intent intent = new Intent(myContext, WebViewActivity.class); 
 	        intent.putExtra("redirectUrl", redirectUrl);
 	         
@@ -261,29 +269,7 @@ public class MainActivity extends ActionBarActivity {
 				
 			case R.id.insertBtn:
 				
-				//初始化一个自定义的Dialog
-	            final AdverDialog dialog=new AdverDialog(myContext, R.style.adverDialog, R.layout.adver_dialog);
-	            dialog.show();
-	            
-	            
-	            mDialogImgView = (ImageView)dialog.getWindow().getDecorView().findViewById(R.id.adver_img);
-
-	            
-	            ImageButton  closeBtn  = (ImageButton)dialog.getWindow().getDecorView().findViewById(R.id.dialog_close_btn);
-	            
-	            mDialogImgView.setImageBitmap(BitmapFactory.decodeByteArray(responseBody, 0, responseBody.length));
-	            
-	            closeBtn.setOnClickListener(new OnClickListener(){
-	            	
-	            	@Override
-	        		public void onClick(View v) {
-	            		dialog.dismiss();
-	        		}
-	            	
-	            });
-	            
-	            mDialogImgView.setOnClickListener(new AdverClickListener());
-	            
+				AdManager.getInstance(myContext).showAdverDialog();
 	            
 				break;
 				
