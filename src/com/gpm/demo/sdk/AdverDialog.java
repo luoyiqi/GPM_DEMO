@@ -6,12 +6,10 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.view.View;
-import android.view.View.OnClickListener;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 
 import com.gpm.demo.R;
-import com.gpm.demo.WebViewActivity;
 
 public class AdverDialog extends Dialog {
 	
@@ -46,6 +44,7 @@ public class AdverDialog extends Dialog {
         this.mDialog = this;
         this.mRedirectUrl = redirectUrl;
         this.mBitmap = bitmap;
+        
     }
     
     @Override

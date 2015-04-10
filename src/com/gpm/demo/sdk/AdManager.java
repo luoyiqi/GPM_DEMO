@@ -5,20 +5,22 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.view.Gravity;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.LinearLayout.LayoutParams;
 import android.widget.Toast;
 
-import com.gpm.demo.MainActivity;
 import com.gpm.demo.R;
-import com.gpm.demo.WebViewActivity;
 import com.loopj.android.http.AsyncHttpResponseHandler;
 import com.loopj.android.http.JsonHttpResponseHandler;
 
@@ -42,6 +44,8 @@ public class AdManager {
 	private static String mRedirectUrl=null;
 	
 	private static Bitmap mBitmap = null;
+	
+	private static byte[] mImgByte ;
 	
 	private static ProgressDialog progressDialog;
 	
@@ -98,28 +102,94 @@ public class AdManager {
 	        final AdverDialog dialog=new AdverDialog(mContext, R.style.adverDialog, R.layout.adver_dialog,mRedirectUrl,mBitmap);
 	        dialog.show();
 	        
-	        
-//	        ImageView mDialogImgView = (ImageView)dialog.getWindow().getDecorView().findViewById(R.id.adver_img);
-//	
-//	        
-//	        ImageButton  closeBtn  = (ImageButton)dialog.getWindow().getDecorView().findViewById(R.id.dialog_close_btn);
-//	        
-//	        
-//	        mDialogImgView.setImageBitmap(mBitmap);
-//	        
-//	        mDialogImgView.setOnClickListener(new AdverClickListener());
-//	        
-//	        closeBtn.setOnClickListener(new OnClickListener(){
-//	        	
-//	        	@Override
-//	    		public void onClick(View v) {
-//	        		dialog.dismiss();
-//	    		}
-//	        	
-//	        });
 		}
         
        
+		
+	}
+	
+	
+	/**
+	 * banner广告
+	 */
+	public void showBannerAdver(){
+		
+		
+		//获取调用者的view
+		View view = ((Activity)mContext).getWindow().getDecorView().findViewById(android.R.id.content);
+		
+		
+		final LinearLayout bannerLayout = (LinearLayout)view.findViewById(R.id.bannerAdLayout);
+		
+		
+		LayoutParams imgParams = new LayoutParams(LayoutParams.FILL_PARENT,LayoutParams.WRAP_CONTENT);
+		
+		
+		ImageView imageView = new ImageView(mContext);
+		
+		imageView.setImageBitmap(mBitmap);
+		
+		
+		ImageButton closeBtn = new ImageButton(mContext);
+		
+		closeBtn.setBackgroundResource(R.drawable.close_btn);
+		
+		LayoutParams closeParams = new LayoutParams(LayoutParams.WRAP_CONTENT,LayoutParams.WRAP_CONTENT);
+		closeParams.gravity= Gravity.RIGHT;
+		
+		
+	
+		bannerLayout.addView(closeBtn,closeParams);
+		
+		
+		bannerLayout.addView(imageView,imgParams);
+		
+		bannerLayout.setVisibility(View.VISIBLE);
+		
+		imageView.setOnClickListener(new AdverClickListener());
+		
+		
+		closeBtn.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				bannerLayout.setVisibility(View.GONE);
+				
+			}
+		});
+		
+	}
+	
+	
+	//全屏广告
+	public void showFullScreenAdver(){
+		
+		
+        Intent intent = new Intent(mContext, AdverActivity.class); 
+        intent.putExtra("redirectUrl", mRedirectUrl);
+        intent.putExtra("imgByte", mImgByte);
+        intent.putExtra("isSplash", false);
+        
+        mContext.startActivity(intent);
+		
+	}
+	
+	
+	/**
+	 * 开屏广告
+	 * @param time
+	 * @param splashAdver
+	 */
+	public void showSplashAdver(int time){
+		
+        Intent intent = new Intent(mContext, AdverActivity.class); 
+        intent.putExtra("redirectUrl", mRedirectUrl);
+        intent.putExtra("imgByte", mImgByte);
+        intent.putExtra("isSplash", true);
+        
+        intent.putExtra("showTime", time);
+        
+        mContext.startActivity(intent);
 		
 	}
 	
@@ -181,6 +251,9 @@ public class AdManager {
 			
 //			progressDialog.dismiss();
 			
+			
+			mImgByte = responseBody;
+			
 			mBitmap= BitmapFactory.decodeByteArray(responseBody, 0, responseBody.length);
             
 	    }  
@@ -200,7 +273,7 @@ public class AdManager {
 	 * @author gavinwen
 	 *
 	 */
-	class AdverClickListener implements OnClickListener {
+	public static class AdverClickListener implements OnClickListener {
 		
 		@Override
 		public void onClick(View v) {
@@ -211,7 +284,6 @@ public class AdManager {
 	        
 	        mContext.startActivity(intent);
 	         
-//	        mContext.geta.startActivityForResult(intent, 0); 
 
 		}
 		
